@@ -6,16 +6,16 @@ import { TeaService }       from '../service/tea.service';
 @Component({
     selector: 'products-list',
     template: `
-    <h2>All Products List: </h2>
-    <button (click)="under20()">Under 20</button>  
-    <button (click)="all()">All</button>
-    <ul>
+    <h2>All Products List:</h2>
+    <button class="btn btn-primary" (click)="under20()">Under 20</button>  
+    <button class="btn btn-primary" (click)="all()">All</button>
+    <ul class="list-group">
         
-      <li *ngFor="let tea of teas" (click)="onSelect(tea)">
+      <li *ngFor="let tea of teas" class="list-group-item" (click)="onSelect(tea)">
         <div class="text-container">
             <div>{{tea.name}}</div>
             <div>{{tea.description}}</div>
-            <div>{{tea.price}}</div>
+            <div>{{tea.price | currency}}</div>
         </div>
         <div class="thumb-container"><img src="{{tea.thumb}}"></div>
       </li>

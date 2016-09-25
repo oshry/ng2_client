@@ -11,9 +11,13 @@ h2, h3 {
 }
 body {
     margin: 2em;
+    padding: 20px;
 }
 ul{
     list-style: none;
+}
+li{
+    min-height: 420px;
 }
 .text-container{
     float:left;

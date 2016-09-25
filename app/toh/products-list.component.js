@@ -43,7 +43,7 @@ var ProductsListComponent = (function () {
     ProductsListComponent = __decorate([
         core_1.Component({
             selector: 'products-list',
-            template: "\n    <h2>All Products List: </h2>\n    <button (click)=\"under20()\">Under 20</button>  \n    <button (click)=\"all()\">All</button>\n    <ul>\n        \n      <li *ngFor=\"let tea of teas\" (click)=\"onSelect(tea)\">\n        <div class=\"text-container\">\n            <div>{{tea.name}}</div>\n            <div>{{tea.description}}</div>\n            <div>{{tea.price}}</div>\n        </div>\n        <div class=\"thumb-container\"><img src=\"{{tea.thumb}}\"></div>\n      </li>\n    </ul>",
+            template: "\n    <h2>All Products List:</h2>\n    <button class=\"btn btn-primary\" (click)=\"under20()\">Under 20</button>  \n    <button class=\"btn btn-primary\" (click)=\"all()\">All</button>\n    <ul class=\"list-group\">\n        \n      <li *ngFor=\"let tea of teas\" class=\"list-group-item\" (click)=\"onSelect(tea)\">\n        <div class=\"text-container\">\n            <div>{{tea.name}}</div>\n            <div>{{tea.description}}</div>\n            <div>{{tea.price | currency}}</div>\n        </div>\n        <div class=\"thumb-container\"><img src=\"{{tea.thumb}}\"></div>\n      </li>\n    </ul>",
             providers: [tea_service_1.TeaService]
         }), 
         __metadata('design:paramtypes', [router_1.Router, tea_service_1.TeaService])

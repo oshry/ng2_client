@@ -16,7 +16,9 @@ import { Tea }              from '../data/tea';
     <div class="thumb-container"><img src="{{tea.thumb}}"></div>
     </div>
     <p>
-      <button (click)="gotoTeas()">Back</button>
+        
+      <button class="btn btn-primary" (click)="addToCart()">Add To Cart</button>
+      <button class="btn btn-primary" (click)="gotoTeas()">Back</button>
     </p>`,
     providers: [ TeaService ]
 })
@@ -39,6 +41,9 @@ export class TeaDetailComponent implements OnInit, OnDestroy{
             .subscribe(
                 tea => this.tea = tea,
                 error =>  this.errorMessage = <any>error);
+    }
+    addToCart(){
+        // console.log('sdssd'+this.tea_id );
     }
     ngOnDestroy() {
         this.sub.unsubscribe();

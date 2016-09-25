@@ -25,13 +25,16 @@ var TeaDetailComponent = (function () {
         this.service.getTea(this.tea_id)
             .subscribe(function (tea) { return _this.tea = tea; }, function (error) { return _this.errorMessage = error; });
     };
+    TeaDetailComponent.prototype.addToCart = function () {
+        // console.log('sdssd'+this.tea_id );
+    };
     TeaDetailComponent.prototype.ngOnDestroy = function () {
         this.sub.unsubscribe();
     };
     TeaDetailComponent.prototype.gotoTeas = function () { this.router.navigate(['/teas']); };
     TeaDetailComponent = __decorate([
         core_1.Component({
-            template: "\n    <h2>Product Page</h2>\n    <div *ngIf=\"tea\">\n    <div class=\"text-container\">\n            <div>{{tea.name}}</div>\n            <div>{{tea.description}}</div>\n            <div>{{tea.price}}</div>\n    </div>\n    <div class=\"thumb-container\"><img src=\"{{tea.thumb}}\"></div>\n    </div>\n    <p>\n      <button (click)=\"gotoTeas()\">Back</button>\n    </p>",
+            template: "\n    <h2>Product Page</h2>\n    <div *ngIf=\"tea\">\n    <div class=\"text-container\">\n            <div>{{tea.name}}</div>\n            <div>{{tea.description}}</div>\n            <div>{{tea.price}}</div>\n    </div>\n    <div class=\"thumb-container\"><img src=\"{{tea.thumb}}\"></div>\n    </div>\n    <p>\n        \n      <button class=\"btn btn-primary\" (click)=\"addToCart()\">Add To Cart</button>\n      <button class=\"btn btn-primary\" (click)=\"gotoTeas()\">Back</button>\n    </p>",
             providers: [tea_service_1.TeaService]
         }), 
         __metadata('design:paramtypes', [router_1.ActivatedRoute, router_1.Router, tea_service_1.TeaService])

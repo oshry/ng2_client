@@ -14,7 +14,7 @@ import { TeaService }       from '../service/tea.service';
         <div class="text-container">
             <div>{{tea.name}}</div>
             <div>{{tea.description}}</div>
-            <div>{{tea.price}}</div>
+            <div>{{tea.price| currency}}</div>
         </div>
         <div class="thumb-container"><img src="{{tea.thumb}}"></div>
       </li>
