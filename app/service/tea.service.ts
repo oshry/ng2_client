@@ -11,7 +11,7 @@ import 'rxjs/Rx';
 export class TeaService {
     constructor (private http: Http) {}
 
-    private teasUrl = 'http://localhost:9292/teas';  // URL to web API
+    private teasUrl = 'http://localhost:3000/teas';  // URL to web API
 
     getTeas (): Observable<Tea[]> {
         return this.http.get(this.teasUrl)

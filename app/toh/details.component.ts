@@ -1,29 +1,37 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Router, ActivatedRoute }       from '@angular/router';
 import { TeaService } from '../service/tea.service';
 import { Subscription } from 'rxjs';
-import { Tea }              from '../data/tea';
+import { Tea } from '../data/tea';
+import {CartService} from "../service/cart.service";
 
 @Component({
     template: `
-    <h2>Product Page</h2>
-    <div *ngIf="tea">
-    <div class="text-container">
-            <div>{{tea.name}}</div>
-            <div>{{tea.description}}</div>
-            <div>{{tea.price}}</div>
-    </div>
-    <div class="thumb-container"><img src="{{tea.thumb}}"></div>
-    </div>
-    <p>
-        
-      <button class="btn btn-primary" (click)="addToCart()">Add To Cart</button>
-      <button class="btn btn-primary" (click)="gotoTeas()">Back</button>
-    </p>`,
-    providers: [ TeaService ]
+    <!--<h2>Product Page</h2>-->
+    <!--<div *ngIf="tea">-->
+    <!--<div class="text-container">-->
+            <!--<div>{{tea.name}}</div>-->
+            <!--<div>{{tea.description}}</div>-->
+            <!--<div>{{tea.price}}</div>-->
+    <!--</div>-->
+    <!--<div class="thumb-container"><img src="{{tea.thumb}}"></div>-->
+    <!--</div>-->
+    
+    <div *ngIf="tea" class="list-group-item">
+        <p class="list-group-item-text my-list-item">
+            <span class="list-group-item-heading my-list-item-heading">{{tea.name}}</span>
+            <span class="my-list-item-body">{{tea.description}}</span>
+            <span class="price">Price: {{tea.price| currency}}</span>
+        </p>
+        <div class="thumb-container thumbnail"><img src="{{tea.thumb}}"></div>
+        <button class="btn btn-primary" (click)="addToCart()">Add To Cart</button>
+        <button class="btn btn-primary" (click)="gotoTeas()">Back</button>
+    </div>`,
+    providers: [ TeaService, CartService ]
 })
 export class TeaDetailComponent implements OnInit, OnDestroy{
-    tea: Tea[];
+    // tea: Tea[];
+    @Input() tea:any;
     private sub: Subscription;
     tea_id: number;
     errorMessage: string;
@@ -31,7 +39,8 @@ export class TeaDetailComponent implements OnInit, OnDestroy{
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private service: TeaService
+        private service: TeaService,
+        private cartService:CartService
     ){}
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
@@ -43,7 +52,7 @@ export class TeaDetailComponent implements OnInit, OnDestroy{
                 error =>  this.errorMessage = <any>error);
     }
     addToCart(){
-        // console.log('sdssd'+this.tea_id );
+        this.cartService.addItem(this.tea);
     }
     ngOnDestroy() {
         this.sub.unsubscribe();

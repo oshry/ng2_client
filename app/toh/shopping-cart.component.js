@@ -9,56 +9,38 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var cart_service_1 = require("../service/cart.service");
+// import {TeaDetailComponent} from "./details.component";
 var ShoppingCartComponent = (function () {
-    function ShoppingCartComponent() {
+    function ShoppingCartComponent(cartService) {
+        this.cartService = cartService;
+        this.cartItems = [];
+        this.sum = 0;
+        this.cartService = cartService;
+        this.cartItems = cartService.getCart();
+        this.totalPrice = this.getTotalPrice(this.cartItems);
     }
-    ShoppingCartComponent.prototype.set = function (name, value) {
-        var expires = arguments.length <= 2 || arguments[2] === undefined ? false : arguments[2];
-        var retVal = false;
-        if (this.support()) {
-            if (expires) {
-                var date = new Date();
-                expires = Math.round(date.setSeconds(date.getSeconds() + expires));
-                localStorage.setItem(name + '_time', expires);
-            }
-            localStorage.setItem(name, value);
-            retVal = true;
-        }
-        return retVal;
-    };
-    ShoppingCartComponent.prototype.get = function (name) {
-        var retVal = null;
-        if (this.support()) {
-            var stored_time = localStorage.getItem(name + '_time');
-            if (stored_time == null || stored_time == undefined) {
-                retVal = localStorage.getItem(name);
+    ShoppingCartComponent.prototype.getTotalPrice = function (items) {
+        items.forEach(function (entry) {
+            if (entry.count > 1) {
+                this.sum += parseInt(entry.price) * parseInt(entry.count);
             }
             else {
-                var date = new Date();
-                var current = date.getTime();
-                if (stored_time < current) {
-                    localStorage.removeItem(name);
-                    localStorage.removeItem(name + '_time');
-                }
-                else {
-                    retVal = localStorage.getItem(name);
-                }
+                this.sum += parseInt(entry.price);
             }
-        }
-        return retVal;
+        }, this);
+        console.log(this.sum);
     };
-    ShoppingCartComponent.prototype.support = function () {
-        var retVal = false;
-        if (typeof Storage !== 'undefined') {
-            retVal = true;
-        }
-        return retVal;
+    ShoppingCartComponent.prototype.removeFromCart = function (id) {
+        this.cartService.remove('blat', id);
+        window.location.reload();
     };
     ShoppingCartComponent = __decorate([
         core_1.Component({
-            template: "\n    <h2>Shopping Cart</h2>\n    <p></p>"
+            template: "\n    <h2>Shopping Cart</h2>\n    <!--<ul class=\"my-list list-group\">-->\n      <!--<li *ngFor=\"let tea of cartItems\">-->\n        <!--<div class=\"text-container\">-->\n            <!--<div>{{tea.name}}</div>-->\n            <!--<div>{{tea.description}}</div>-->\n            <!--<div>{{tea.price| currency}}</div>-->\n            <!--<div>{{tea.count}}</div>-->\n            <!--<button class=\"btn btn-primary\" (click)=\"removeFromCart(tea.id)\" >Remove</button>-->\n        <!--</div>-->\n        <!--<div class=\"thumb-container\"><img src=\"{{tea.thumb}}\"></div>-->\n      <!--</li>-->\n      \n      <table class=\"table\">\n        <tr>\n            <th></th>\n            <th>Name</th>\n            <th>Description</th>\n            <th>Price</th>\n            <th>Quantity</th>\n            <th></th>\n        </tr>\n        <tr *ngFor=\"let tea of cartItems\" class=\"list-group-item-text\">\n            <td><img src=\"{{tea.thumb}}\"></td>\n            <td>{{tea.name}}</td>\n            <td>{{tea.description}}</td>\n            <td>{{tea.price| currency}}</td>\n            <td *ngIf=\"tea.count\">{{tea.count}}</td>\n            <td *ngIf=\"!tea.count\">1</td>\n            <td>\n                <button class=\"btn btn-primary\" (click)=\"removeFromCart(tea.id)\" >Remove</button>\n            </td>\n        </tr>\n        \n      </table>\n    <!--</ul>-->\n    <p></p>",
+            providers: [cart_service_1.CartService]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [cart_service_1.CartService])
     ], ShoppingCartComponent);
     return ShoppingCartComponent;
 }());

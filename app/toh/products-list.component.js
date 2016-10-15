@@ -17,7 +17,7 @@ var ProductsListComponent = (function () {
         this.teaService = teaService;
         this.mode = 'Observable';
     }
-    ProductsListComponent.prototype.onSelect = function (tea) {
+    ProductsListComponent.prototype.gotoDetails = function (tea) {
         this.router.navigate(['/tea', tea.id]);
     };
     ProductsListComponent.prototype.under20 = function () {
@@ -43,7 +43,7 @@ var ProductsListComponent = (function () {
     ProductsListComponent = __decorate([
         core_1.Component({
             selector: 'products-list',
-            template: "\n    <h2>All Products List:</h2>\n    <button class=\"btn btn-primary\" (click)=\"under20()\">Under 20</button>  \n    <button class=\"btn btn-primary\" (click)=\"all()\">All</button>\n    <ul class=\"list-group\">\n        \n      <li *ngFor=\"let tea of teas\" class=\"list-group-item\" (click)=\"onSelect(tea)\">\n        <div class=\"text-container\">\n            <div>{{tea.name}}</div>\n            <div>{{tea.description}}</div>\n            <div>{{tea.price | currency}}</div>\n        </div>\n        <div class=\"thumb-container\"><img src=\"{{tea.thumb}}\"></div>\n      </li>\n    </ul>",
+            template: "\n    <h2>Products:</h2>\n    <span>Filters: </span>\n    <button class=\"btn btn-primary\" (click)=\"under20()\">Under 20</button>  \n    <button class=\"btn btn-primary\" (click)=\"all()\">All</button>\n    <ul class=\"my-list list-group\">\n      <li *ngFor=\"let tea of teas\" class=\"list-group-item\" (click)=\"gotoDetails(tea)\">\n        <p class=\"list-group-item-text my-list-item\">\n            <span class=\"list-group-item-heading my-list-item-heading\">{{tea.name}}</span>\n            <span class=\"my-list-item-body\">{{tea.description}}</span>\n            <span class=\"price\">Price: {{tea.price| currency}}</span>\n        </p>\n        <div class=\"thumb-container thumbnail\"><img src=\"{{tea.thumb}}\"></div>\n      </li>\n    </ul>",
             providers: [tea_service_1.TeaService]
         }), 
         __metadata('design:paramtypes', [router_1.Router, tea_service_1.TeaService])

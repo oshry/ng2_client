@@ -16,7 +16,7 @@ require('rxjs/Rx');
 var TeaService = (function () {
     function TeaService(http) {
         this.http = http;
-        this.teasUrl = 'http://localhost:9292/teas'; // URL to web API
+        this.teasUrl = 'http://localhost:3000/teas'; // URL to web API
     }
     TeaService.prototype.getTeas = function () {
         return this.http.get(this.teasUrl)

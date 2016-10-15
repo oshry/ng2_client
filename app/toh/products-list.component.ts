@@ -6,18 +6,18 @@ import { TeaService }       from '../service/tea.service';
 @Component({
     selector: 'products-list',
     template: `
-    <h2>All Products List:</h2>
+    <h2>Products:</h2>
+    <span>Filters: </span>
     <button class="btn btn-primary" (click)="under20()">Under 20</button>  
     <button class="btn btn-primary" (click)="all()">All</button>
-    <ul class="list-group">
-        
-      <li *ngFor="let tea of teas" class="list-group-item" (click)="onSelect(tea)">
-        <div class="text-container">
-            <div>{{tea.name}}</div>
-            <div>{{tea.description}}</div>
-            <div>{{tea.price | currency}}</div>
-        </div>
-        <div class="thumb-container"><img src="{{tea.thumb}}"></div>
+    <ul class="my-list list-group">
+      <li *ngFor="let tea of teas" class="list-group-item" (click)="gotoDetails(tea)">
+        <p class="list-group-item-text my-list-item">
+            <span class="list-group-item-heading my-list-item-heading">{{tea.name}}</span>
+            <span class="my-list-item-body">{{tea.description}}</span>
+            <span class="price">Price: {{tea.price| currency}}</span>
+        </p>
+        <div class="thumb-container thumbnail"><img src="{{tea.thumb}}"></div>
       </li>
     </ul>`,
     providers: [ TeaService ]
@@ -30,7 +30,7 @@ export class ProductsListComponent implements OnInit {
 
     constructor (private router: Router, private teaService: TeaService) {}
 
-    onSelect(tea: Tea) {
+    gotoDetails(tea: Tea) {
         this.router.navigate(['/tea', tea.id]);
     }
     under20(){

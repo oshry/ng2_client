@@ -3,11 +3,11 @@ import { Component } from '@angular/core';
     selector: 'my-app',
     template: `
     <h1>Tea Shop</h1>
-    <nav>
-      <a routerLink="/" routerLinkActive="active">Home</a>
-      <a routerLink="/teas" routerLinkActive="active">Products</a>
-      <a routerLink="/shopping-cart" routerLinkActive="active">Cart</a>
-    </nav>
+    <ul class="nav nav-pills" >
+      <li role="presentation" routerLink="/" class="active"><a href="#">Home</a></li>
+      <li role="presentation" routerLink="/teas" ><a href="#">Products</a></li>
+      <li role="presentation" routerLink="/shopping-cart"><a href="#">Cart</a></li>
+    </ul>
     <router-outlet></router-outlet>
   `
 })

@@ -8,15 +8,15 @@ import { TeaService }       from '../service/tea.service';
 @Component({
     selector: 'expensive-list',
     template: `
-    <h2>Most Expensive Teas: </h2>
-    <ul>
-      <li *ngFor="let tea of teas | top5" (click)="onSelect(tea)">
-        <div class="text-container">
-            <div>{{tea.name}}</div>
-            <div>{{tea.description}}</div>
-            <div>{{tea.price| currency}}</div>
-        </div>
-        <div class="thumb-container"><img src="{{tea.thumb}}"></div>
+    <h2>Homepage</h2>
+    <ul class="my-list list-group">
+      <li class="list-group-item" *ngFor="let tea of teas | top5" (click)="onSelect(tea)">
+        <p class="list-group-item-text my-list-item">
+            <span class="list-group-item-heading my-list-item-heading">{{tea.name}}</span>
+            <span class="my-list-item-body">{{tea.description}}</span>
+            <span class="price">Price: {{ tea.price | currency}}</span>
+        </p>
+        <div class="thumb-container thumbnail"><img src="{{tea.thumb}}"></div>
       </li>
     </ul>`,
     providers: [ TeaService ]

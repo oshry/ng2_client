@@ -16,14 +16,31 @@ body {
 ul{
     list-style: none;
 }
-li{
+.my-list li{
     min-height: 420px;
 }
 .text-container{
     float:left;
     width:50%;
 }
-.thumb-container{
-    float:left;
+.my-list-item{
     width:50%;
+    float:left;
+}
+.thumb-container{
+    display: inline-table !important;
+    width: 50%;
+    margin-bottom: 0px !important;
+}
+.price{
+    display: block;
+    font: 17px bold;
+}
+.my-list-item-heading{
+    display: block;
+    font: 22px bold;
+}
+.my-list-item-body{
+    padding: 30px 60px 30px 0px;
+    display: block;
 }

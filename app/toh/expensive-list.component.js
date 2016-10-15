@@ -29,7 +29,7 @@ var ExpensiveListComponent = (function () {
     ExpensiveListComponent = __decorate([
         core_1.Component({
             selector: 'expensive-list',
-            template: "\n    <h2>Most Expensive Teas: </h2>\n    <ul>\n      <li *ngFor=\"let tea of teas | top5\" (click)=\"onSelect(tea)\">\n        <div class=\"text-container\">\n            <div>{{tea.name}}</div>\n            <div>{{tea.description}}</div>\n            <div>{{tea.price| currency}}</div>\n        </div>\n        <div class=\"thumb-container\"><img src=\"{{tea.thumb}}\"></div>\n      </li>\n    </ul>",
+            template: "\n    <h2>Homepage</h2>\n    <ul class=\"my-list list-group\">\n      <li class=\"list-group-item\" *ngFor=\"let tea of teas | top5\" (click)=\"onSelect(tea)\">\n        <p class=\"list-group-item-text my-list-item\">\n            <span class=\"list-group-item-heading my-list-item-heading\">{{tea.name}}</span>\n            <span class=\"my-list-item-body\">{{tea.description}}</span>\n            <span class=\"price\">Price: {{ tea.price | currency}}</span>\n        </p>\n        <div class=\"thumb-container thumbnail\"><img src=\"{{tea.thumb}}\"></div>\n      </li>\n    </ul>",
             providers: [tea_service_1.TeaService]
         }), 
         __metadata('design:paramtypes', [router_1.Router, tea_service_1.TeaService])
